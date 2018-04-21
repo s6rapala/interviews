@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
 
@@ -38,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'interviews.apps.InterviewsConfig',
-    'debug_toolbar'
-
+    'debug_toolbar',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
