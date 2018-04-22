@@ -8,34 +8,45 @@ list all possible HR people who can interview this candidate.
 # List of REST endpoints
 #### Manage list of employees who make interviews
 /employees
-- GET - get list of all employees
+- GET - list all employees
 - POST - create new employee
-- DELETE - delete employee
-- PUT - update employee
 
 /candidates/{employeeKey}
-- GET - get available time slots for a specific employee
-- POST - create new time slot for a specific employee
-- DELETE - delete time slot for a specific employee
-- PUT - update time slot for a specific employee
+- GET - list available time slots for a specific employee
+- DELETE - delete a specific employee
+- PUT - update a specific employee
+
+/employees/{employeeKey}/timeslots/
+- GET - list available time slots for a specific employee
+- POST - create a new time slot for a specific employee
+
+/employees/{employeeKey}/timeslots/{timeslotKey}
+- GET - show a specific timeslot for a specific employee
+- PUT - update a new time slot for a specific employee
 
 
 #### Manage list of candidates who take interviews
 /candidates
-- GET - get list of all candidates
-- POST - create new candidate
-- DELETE - delete candidate
-- PUT - update candidate
+- GET - list all candidates
+- POST - create a new candidate
 
 
 /candidates/{candidateKey}
-- GET - get available time slots for a specific candidate
-- POST - create new time slot for a specific candidate
-- DELETE - delete time slot for a specific candidate
-- PUT - update time slot for a specific candidate
+- GET - list available time slots for a specific candidate
+- DELETE - delete a specific candidate
+- PUT - update a specific candidate
+
+/candidates/{candidateKey}/timeslots/
+- GET - list available time slots for a specific candidate
+- POST - create a new time slot for a specific candidate
+
+/candidates/{candidateKey}/timeslots/{timeslotKey}
+- GET - show a specific timeslot for a specific candidate
+- PUT - update a new time slot for a specific candidate
+
 
 
 #### Receive a list of time slots to make an interview
-/timesheet?candidateKey={candidateKey}?employeeKeys={employeeKeys}
-- GET
+/timeslots/?candidate_id={candidateKey}?employee_id={employeeKeys}
+- GET - get available time slots for a specific candidate and list of employees
 (providing a candidate and list of interviewers required).
