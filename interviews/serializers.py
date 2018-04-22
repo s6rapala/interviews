@@ -33,3 +33,15 @@ class EmployeeListSerializer(serializers.HyperlinkedModelSerializer):
             'id',
             'name',
         ]
+
+
+class AvailableTimeSlotsListSerializer(serializers.Serializer):
+    employee_id = serializers.IntegerField()
+    start_date = serializers.DateTimeField()
+    end_date = serializers.DateTimeField()
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass
