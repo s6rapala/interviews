@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'interviews.apps.InterviewsConfig',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework_nested'
 ]
 
 MIDDLEWARE = [
