@@ -3,7 +3,7 @@ from rest_framework import serializers
 from interviews.models import EmployeeAvailability, Employee
 
 
-class EmployeeAvailabilitySerializer(serializers.HyperlinkedModelSerializer):
+class EmployeeAvailabilityListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmployeeAvailability
         fields = [
@@ -15,7 +15,7 @@ class EmployeeAvailabilitySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EmployeeSerializerDetail(serializers.HyperlinkedModelSerializer):
-    timeslots = EmployeeAvailabilitySerializer(many=True, read_only=True)
+    timeslots = EmployeeAvailabilityListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Employee
@@ -26,7 +26,7 @@ class EmployeeSerializerDetail(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class EmployeeSerializerList(serializers.HyperlinkedModelSerializer):
+class EmployeeListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Employee
         fields = [
