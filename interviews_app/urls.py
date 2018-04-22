@@ -13,22 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
 from django.conf import settings
 from django.conf.urls import include, url
-from rest_framework import routers
+from django.contrib import admin
+from django.urls import path
+from rest_framework_nested import routers
 
-from interviews.views import EmployeeAvailabilityViewSet
+from interviews import views
 
 router = routers.DefaultRouter()
-router.register(r'employees', EmployeeAvailabilityViewSet)
+router.register(r'employees', views.EmployeeViewSet)
+
+domains_router = routers.NestedSimpleRouter(router, r'employees', lookup='employee')
+domains_router.register(r'timeslots', views.EmployeeAvailabilityViewSet, base_name='employee-timeslots')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
+    url(r'^api/', include(domains_router.urls)),
+    # url(r'^api/employees/$', views.EmployeeList),
+    # url(r'^api/employees/(?P<pk>\d+)/$', views.EmployeeAvailabilityViewSet, name='retrieve'),
 ]
-
 
 if settings.DEBUG:
     import debug_toolbar
