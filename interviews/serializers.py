@@ -14,7 +14,7 @@ class EmployeeAvailabilitySerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
+class EmployeeSerializerDetail(serializers.HyperlinkedModelSerializer):
     timeslots = EmployeeAvailabilitySerializer(many=True, read_only=True)
 
     class Meta:
