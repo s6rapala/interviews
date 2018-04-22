@@ -2,14 +2,18 @@ from django.db import models
 
 
 # Create your models here.
+
+
+class Employee(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+
+
 class EmployeeAvailability(models.Model):
-    id = models.AutoField(primary_key=True, )
-    employee_name = models.CharField(max_length=20)
+    id = models.AutoField(primary_key=True)
+    employee = models.ForeignKey(Employee, related_name='timeslots', on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
 
     def __str__(self):
-        pass  # TODO ID, date, time start, time end
-
-
-
+        return f"{self.employee.name} is available on {self.start_date}"
