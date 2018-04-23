@@ -1,21 +1,20 @@
 # Create your views here.
-from django.http import Http404, HttpResponseGone
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from interviews.models import EmployeeAvailability, Employee
+from interviews.models import EmployeeAvailability, Employee, Candidate, CandidateAvailability
 from interviews.response import Http422, Http400
 from interviews.serializers import EmployeeAvailabilityListSerializer, EmployeeSerializerDetail, EmployeeListSerializer, \
-    AvailableTimeSlotsListSerializer
+    AvailableTimeSlotsListSerializer, CandidateListSerializer, CandidateSerializerDetail, \
+    CandidateAvailabilityListSerializer
 from .utils import intersection
 
 
 class EmployeeAvailabilityViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows employee availability to be viewed or edited
+    API endpoint that allows Employee availability to be viewed or edited
     """
-    # queryset = EmployeeAvailability.objects.all()
     serializer_class = EmployeeAvailabilityListSerializer
 
     def get_queryset(self):
