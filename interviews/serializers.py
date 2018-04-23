@@ -13,6 +13,14 @@ class EmployeeAvailabilityListSerializer(serializers.HyperlinkedModelSerializer)
             'end_date',
             'employee_id',
         ]
+        # TODO this validator breaks other behaviour of this Serializer. Very strange.
+        # validators = [
+        #     serializers.UniqueTogetherValidator(
+        #         queryset=model.objects.all(),
+        #         fields=('employee_id', 'start_date', 'end_date'),
+        #         message=("Some custom message.")
+        #     )
+        # ]
 
 
 class EmployeeSerializerDetail(serializers.HyperlinkedModelSerializer):
