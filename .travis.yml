@@ -21,7 +21,7 @@ before_script:
 
 script:
   - python manage.py test
-  - coverage run --source='.' manage.py test myapp
+  - coverage run --source='.' manage.py test interviews
 
 after_success:
   - codecov
