@@ -23,7 +23,7 @@ from interviews import views
 
 router = routers.DefaultRouter()
 router.register(r'employees', views.EmployeeViewSet)
-router.register(r'timeslots', views.AvailableTimeSlotsList, base_name='timeslots')
+router.register(r'timeslots', views.AvailableTimeSlotsListViewSet, base_name='timeslots')
 
 domains_router = routers.NestedSimpleRouter(router, r'employees', lookup='employee')
 domains_router.register(r'timeslots', views.EmployeeAvailabilityViewSet, base_name='employee-timeslots')
