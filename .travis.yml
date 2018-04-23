@@ -1,8 +1,8 @@
 language: python
 
 python:
-  - "3.6"
-  - "nightly"
+  - '3.6'
+  - 'nightly'
 
 services:
   - postgresql
@@ -25,3 +25,7 @@ script:
 
 after_success:
   - codecov
+
+notifications:
+  slack:
+    secure: Zi5pUbsi2gxiDKiT1wVPzm2LxeSXprgCZUFhlBrAbJyJfCK6tfZPGkkhfkKJMJwaWbwZcMOjsrucvbS9h7NFU28hADVpU1qaOntxfKK29WHkl4B77aP1mVuvCsNM/PvfJEi4Hxh15d52tPYbps4xUpkUtdo3hiAnNJWC3IFcSTcTlQ9RZr7we6JsRJhbKH2Gwz9+dVwl1z5SdXOJEdknF+PDvgFEUR6echIvKqSaWgaLbko/ROJMdspdcHqYI2mSh26aH/LX9qbiNdf0UNB8zXURzbJX0Zuff2UOGnfyxaTf1T20zXoGEu+ZvCqJ+09SzSEy/j5kT8v6bWl+2qUTdzvsJywGEwSmxgo5g4TNFkE1TSTqbzRj/Xk2A1lu0tiHvX8tW5TtQA/kOuQlmoU+AP6lUwY3exSUKJf6SGXudiG/OgACh2Y9O9kqa/Hd6H/QivrAyCuNZRWBgMwyo9LF2RX9ekzcIS3MqBfK0H9/MIHbLC8ELg+AES/58OwEJJiQQ/W7+8rVFhCVpUo7tbyKFPE/SySwplLVOesA8k5N55YCdwYvokpTh3iEZQ5gSmGyz5aZ7hHveqDKgX3ejDBHwIuQRStBNHLSATbS5b3CxGl9t374YVOUvVXa18HQf24usWSYMtplYF9aZ5QxL6sIVTEGg1gz9lptag1/V/wb0pc=
