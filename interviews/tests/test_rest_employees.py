@@ -26,3 +26,25 @@ class TestTimeslots(TestCase):
         payload = {'candidate_id': self.employee.id}
         response = self.client.get(reverse('timeslots-list'), payload)
         self.assertTrue(response.status_code == status.HTTP_400_BAD_REQUEST)
+
+    # def test_str(self):
+    #     response = self.client.get('/api/employees/1')
+    #     # response = view
+    #
+    #     # print(response.__dict__)
+    #     # print(response.status_code)
+    #     self.assertTrue(response.status_code == status.HTTP_301_MOVED_PERMANENTLY)
+    #
+    # def test_post_user(self):
+    #     url = reverse('employee-list')
+    #     # print(reverse('employee-detail'))
+    #     response = self.client.post(url, {'name': 'user1'}, format='json')
+    #     self.assertEquals(response.status_code, status.HTTP_201_CREATED)
+    #
+    # def test_get_timeslots(self):
+    #     url = reverse('timeslots-list')
+    #     print(url)
+    #     # print(reverse('employee-detail'))
+    #     response = self.client.get(url + '1')
+    #     print(response.__dict__)
+    #     self.assertEquals(response.status_code, status.HTTP_301_MOVED_PERMANENTLY)
