@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import serializers
 
 from interviews.models import EmployeeAvailability, Employee
@@ -16,6 +17,9 @@ class EmployeeAvailabilityListSerializer(serializers.HyperlinkedModelSerializer)
 
 class EmployeeSerializerDetail(serializers.HyperlinkedModelSerializer):
     timeslots = EmployeeAvailabilityListSerializer(many=True, read_only=True)
+
+    def update(self, **kwargs):
+        pass
 
     class Meta:
         model = Employee
