@@ -25,3 +25,8 @@ class EmployeeAvailability(models.Model):
 
     def __str__(self):
         return f'{self.employee.name} is available from {self.start_date:%b-%d %H:%M} to {self.end_date:%b-%d %H:%M}'
+
+    def save(self, *args, **kwargs):
+        if self._state.adding and (self.start_date > self.end_date):
+            raise ValueError('Start date must be before end date')
+        super().save(*args, **kwargs)

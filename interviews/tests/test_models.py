@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.test import TestCase
 from model_mommy import mommy
 
@@ -17,8 +19,14 @@ class TestEmployeeAvailability(TestCase):
         self.models = mommy.make(EmployeeAvailability)
 
     def test_str(self):
-        print(str(self.models))
         self.assertEquals(str(self.models),
                           f'{self.models.employee.name} is available from '
                           f'{self.models.start_date:%b-%d %H:%M} '
                           f'to {self.models.end_date:%b-%d %H:%M}')
+
+    def test_end_date_in_the_past_raises_value_error(self):
+        model = EmployeeAvailability(employee_id=self.models.employee.id,
+                                     start_date=datetime.now(),
+                                     end_date=datetime.now() + timedelta(days=-1))
+        with self.assertRaises(ValueError):
+            model.save()
