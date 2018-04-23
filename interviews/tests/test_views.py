@@ -3,7 +3,8 @@ from django.test import TestCase
 from model_mommy import mommy
 
 from interviews.models import Employee, EmployeeAvailability, Candidate, CandidateAvailability
-from interviews.views import EmployeeAvailabilityViewSet, CandidateAvailabilityViewSet
+from interviews.views.candidate import CandidateAvailabilityViewSet
+from interviews.views.employee import EmployeeAvailabilityViewSet
 
 
 class TestEmployeeAvailabilityViewSet(TestCase):

@@ -19,18 +19,18 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework_nested import routers
 
-from interviews import views
+from interviews.views import candidate, employee, timeslots
 
 router = routers.DefaultRouter()
-router.register(r'employees', views.EmployeeViewSet)
-router.register(r'candidates', views.CandidateViewSet)
-router.register(r'timeslots', views.AvailableTimeSlotsListViewSet, base_name='timeslots')
+router.register(r'employees', employee.EmployeeViewSet)
+router.register(r'candidates', candidate.CandidateViewSet)
+router.register(r'timeslots', timeslots.AvailableTimeSlotsListViewSet, base_name='timeslots')
 
 employees_router = routers.NestedSimpleRouter(router, r'employees', lookup='employee')
-employees_router.register(r'timeslots', views.EmployeeAvailabilityViewSet, base_name='employee-timeslots')
+employees_router.register(r'timeslots', employee.EmployeeAvailabilityViewSet, base_name='employee-timeslots')
 
 candidates_router = routers.NestedSimpleRouter(router, r'candidates', lookup='candidate')
-candidates_router.register(r'timeslots', views.CandidateAvailabilityViewSet, base_name='candidate-timeslots')
+candidates_router.register(r'timeslots', candidate.CandidateAvailabilityViewSet, base_name='candidate-timeslots')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
