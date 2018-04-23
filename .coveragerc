@@ -1,5 +1,5 @@
 [run]
-source=Signal2RGraph
+source=interviews
 
 [report]
 show_missing = True
