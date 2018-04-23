@@ -14,9 +14,14 @@ before_install:
 install:
   - pip install -r requirements.txt
   - pip install psycopg2 --quiet
+  - pip install codecov
 
 before_script:
   - psql -c "CREATE DATABASE travis_test_database;" -U postgres
 
 script:
   - python manage.py test
+  - coverage run --source='.' manage.py test myapp
+
+after_success:
+  - codecov
