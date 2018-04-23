@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from django.test import TestCase
 from model_mommy import mommy
+from rest_framework.exceptions import ValidationError
 
 from interviews.models import Employee, EmployeeAvailability
 
@@ -28,5 +29,5 @@ class TestEmployeeAvailability(TestCase):
         model = EmployeeAvailability(employee_id=self.models.employee.id,
                                      start_date=datetime.now(),
                                      end_date=datetime.now() + timedelta(days=-1))
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             model.save()
