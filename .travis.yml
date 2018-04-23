@@ -24,7 +24,7 @@ script:
   - coverage run --source='.' manage.py test interviews
 
 after_success:
-  - codecov
+  - codecov -t f6f5794d-80a4-40e3-b5c2-b32f249f4268
   - bash <(curl -s https://codecov.io/bash)
 
 
