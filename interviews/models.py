@@ -1,12 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+# not sure why django docs insist on overwriting _, it's a useful python operator
 
 # Create your models here.
 from rest_framework.exceptions import ValidationError
 
 
 class Employee(models.Model):
+    # don't want to put employees and candidates in 1 one table
+    # because later this will result in all kinds of different problems
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
 
