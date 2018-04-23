@@ -54,6 +54,33 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+class CandidateAvailabilityViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Candidate availability to be viewed or edited
+    """
+    serializer_class = CandidateAvailabilityListSerializer
+
+    def get_queryset(self):
+        return CandidateAvailability.objects.filter(candidate=self.kwargs['candidate_pk'])
+
+    def perform_create(self, serializer):
+        serializer.save(candidate_id=self.kwargs['candidate_pk'])
+
+
+class CandidateViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Candidate to be viewed or edited
+    """
+    queryset = Candidate.objects.all()
+    serializer_class = CandidateListSerializer
+
+    def retrieve(self, request, pk=None, **kwargs):
+        queryset = Candidate.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = CandidateSerializerDetail(user)
+        return Response(serializer.data)
+
+
 class AvailableTimeSlotsListViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AvailableTimeSlotsListSerializer
 
@@ -61,9 +88,9 @@ class AvailableTimeSlotsListViewSet(viewsets.ReadOnlyModelViewSet):
         # this func gets called twice (based on django debug report)
         # google tells it's because of permission evaluation inside BrowseableAPI
         candidate_id, employee_ids = self.validate_input()
-        queryset_candidate_timeslots = EmployeeAvailability.objects \
-            .filter(employee_id=candidate_id) \
-            .values('employee_id', 'start_date', 'end_date')
+        queryset_candidate_timeslots = CandidateAvailability.objects \
+            .filter(candidate_id=candidate_id) \
+            .values('candidate_id', 'start_date', 'end_date')
         queryset_employee_timeslots = EmployeeAvailability.objects \
             .filter(employee_id__in=employee_ids) \
             .values('employee_id', 'start_date', 'end_date')

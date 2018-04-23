@@ -1,10 +1,9 @@
-from model_mommy import mommy
-from django.test import TestCase
 from django.test import RequestFactory
-from django.urls import reverse
+from django.test import TestCase
+from model_mommy import mommy
 
-from interviews.models import Employee, EmployeeAvailability
-from interviews.views import EmployeeAvailabilityViewSet, EmployeeViewSet, AvailableTimeSlotsListViewSet
+from interviews.models import Employee, EmployeeAvailability, Candidate, CandidateAvailability
+from interviews.views import EmployeeAvailabilityViewSet, CandidateAvailabilityViewSet
 
 
 class TestEmployeeAvailabilityViewSet(TestCase):
@@ -52,3 +51,19 @@ class TestAvailableTimeSlotsListViewSet(TestCase):
     #     # view.request.query_params['employee_id'] = 5
     #     queryset = view.get_queryset()
     #     self.assertEquals([i for i in queryset], [i for i in employee_availability])
+
+
+class TestCandidateAvailabilityViewSet(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.candidate_model = mommy.make(Candidate)
+        self.candidate_availability_model = mommy.make(CandidateAvailability, candidate_id=self.candidate_model.id,
+                                                       _quantity=5)
+
+    def test_get_query_set(self):
+        candidate = self.candidate_model
+        candidate_availability = self.candidate_availability_model
+        view = CandidateAvailabilityViewSet()
+        view.kwargs = {'candidate_pk': candidate.id}
+        queryset = view.get_queryset()
+        self.assertEquals([i for i in queryset], [i for i in candidate_availability])

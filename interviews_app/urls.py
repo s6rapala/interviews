@@ -23,15 +23,20 @@ from interviews import views
 
 router = routers.DefaultRouter()
 router.register(r'employees', views.EmployeeViewSet)
+router.register(r'candidates', views.CandidateViewSet)
 router.register(r'timeslots', views.AvailableTimeSlotsListViewSet, base_name='timeslots')
 
-domains_router = routers.NestedSimpleRouter(router, r'employees', lookup='employee')
-domains_router.register(r'timeslots', views.EmployeeAvailabilityViewSet, base_name='employee-timeslots')
+employees_router = routers.NestedSimpleRouter(router, r'employees', lookup='employee')
+employees_router.register(r'timeslots', views.EmployeeAvailabilityViewSet, base_name='employee-timeslots')
+
+candidates_router = routers.NestedSimpleRouter(router, r'candidates', lookup='candidate')
+candidates_router.register(r'timeslots', views.CandidateAvailabilityViewSet, base_name='candidate-timeslots')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
-    url(r'^api/', include(domains_router.urls)),
+    url(r'^api/', include(employees_router.urls)),
+    url(r'^api/', include(candidates_router.urls)),
     # url(r'^api/employees/$', views.EmployeeList),
     # url(r'^api/employees/(?P<pk>\d+)/$', views.EmployeeAvailabilityViewSet, name='retrieve'),
 ]
