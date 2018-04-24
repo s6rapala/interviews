@@ -2,7 +2,7 @@
 [![codeclimate](https://codeclimate.com/github/stashkov/interviews/badges/gpa.svg)](https://codeclimate.com/github/stashkov/interviews/issues)
 [![codecov](https://codecov.io/gh/stashkov/interviews/branch/master/graph/badge.svg)](https://codecov.io/gh/stashkov/interviews)
 
-# Synopsis
+# Description
 This application helps HR personnel to find
 an appropriate time slot for candidates.
 In other words, given a candidate and their time availability,
