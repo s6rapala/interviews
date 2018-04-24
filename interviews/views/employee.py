@@ -1,5 +1,6 @@
+import django_filters
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.response import Response
 
 from interviews.serializers import *
@@ -32,6 +33,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     """
     queryset = Employee.objects.all()
     serializer_class = EmployeeListSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter,)
+    filter_fields = ('name',)  # only exact match (but can be a regex search with $)
 
     def retrieve(self, request, pk=None, **kwargs):
         """

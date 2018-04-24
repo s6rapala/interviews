@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'interviews.apps.InterviewsConfig',
     'debug_toolbar',
     'rest_framework',
-    'rest_framework_nested'
+    'rest_framework_nested',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'interviews_app.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

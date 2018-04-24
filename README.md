@@ -25,7 +25,14 @@ pip install -r requiremenets.txt
 - GET - list all employees
 - POST - create new employee
 
-/candidates/{employeeKey}
+
+/employees/?name={employeeName}
+- GET - search for employee with a specified name
+
+/employees/?ordering=name
+- GET - we don't really need this, but hey, it's a feature!
+
+/employees/{employeeKey}
 - GET - list available time slots for a specific employee
 - DELETE - delete a specific employee
 - PUT - update a specific employee
