@@ -1,9 +1,16 @@
+import copy
+
 from rest_framework import serializers
 
 from interviews.models import EmployeeAvailability, Employee, Candidate, CandidateAvailability
 
 
 class EmployeeAvailabilityListSerializer(serializers.HyperlinkedModelSerializer):
+    def validate(self, data):
+        if ('start_date' in data and 'end_date' in data) and data['start_date'] > data['end_date']:
+            raise serializers.ValidationError("start_date must occur after end_date")
+        return data
+
     class Meta:
         model = EmployeeAvailability
         fields = [
@@ -56,6 +63,11 @@ class CandidateListSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CandidateAvailabilityListSerializer(serializers.HyperlinkedModelSerializer):
+    def validate(self, data):
+        if ('start_date' in data and 'end_date' in data) and data['start_date'] > data['end_date']:
+            raise serializers.ValidationError("start_date must occur after end_date")
+        return data
+
     class Meta:
         model = CandidateAvailability
         fields = [
