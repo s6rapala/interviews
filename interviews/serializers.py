@@ -103,3 +103,27 @@ class AvailableTimeSlotsListSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         pass
+
+
+class TimeSlotsSerializer(serializers.Serializer):
+    candidate_id = serializers.IntegerField()
+    employee_id = serializers.ListField(child=serializers.IntegerField())
+    start_date = serializers.DateTimeField(required=False)
+    end_date = serializers.DateTimeField(required=False)
+
+    def update(self, instance, validated_data):
+        pass
+
+    def create(self, validated_data):
+        pass
+
+    def to_internal_value(self, data):
+        data = copy.copy(dict(data))  # shallow copy is sufficient (no need for deepcopy)
+        try:
+            data['candidate_id'] = int(data['candidate_id'][0])
+            data['employee_id'] = [int(i) for i in data['employee_id'][0].split(',')]
+        except ValueError:
+            pass  # we can pass because it will be handled later by serializer itself
+        except KeyError as e:
+            raise serializers.ValidationError("KeyError test")
+        return super().to_internal_value(data)
