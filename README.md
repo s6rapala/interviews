@@ -61,6 +61,12 @@ pip install -r requiremenets.txt
 
 
 #### Receive a list of time slots to make an interview
+
+Note: Providing a candidate and list of interviewers required.
+
 /timeslots/?candidate_id={candidateKey}?employee_id={employeeKeys}
-- GET - get available time slots for a specific candidate and list of employees
-(providing a candidate and list of interviewers required).
+- GET - get available time slots for a specific candidate and a list of employees for next week
+
+
+/timeslots/?candidate_id={candidateKey}?employee_id={employeeKeys}&start_date={start_date}&end_date={end_date}/
+- GET - get available time slots for a specific candidate and a list of emplyees for specific dates

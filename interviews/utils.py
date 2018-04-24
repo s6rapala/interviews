@@ -1,9 +1,11 @@
 import collections
+import datetime
 from collections import namedtuple
 
 PossibleDates = collections.namedtuple('PossibleDates', 'employee_id start_date end_date')
 
 
+# TODO move intersection to a class of its own
 def _calculate_intersection(interval1, interval2):
     """find intersection between two intervals"""
     employee_id, first_start, first_end = interval1
@@ -43,3 +45,9 @@ def intersection(candidate_intervals, employee_intervals) -> list:
 def convert_to_named_tuple(dicts: list) -> list:
     """converts list of dictionaries to list of named tuples"""
     return [namedtuple('Candidate', d.keys())(**d) for d in dicts]
+
+
+def start_and_end_date_of_next_week(today=datetime.date.today()):
+    next_monday = today + datetime.timedelta(days=(7 - today.weekday()))
+    next_saturday = next_monday + datetime.timedelta(days=7, minutes=-1)
+    return next_monday, next_saturday
