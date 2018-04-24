@@ -15,17 +15,17 @@ class TestTimeslots(TestCase):
     def test_get_correct_request_should_give_200(self):
         payload = {'candidate_id': self.employee.id, 'employee_id': self.employee.id}
         response = self.client.get(reverse('timeslots-list'), payload)
-        self.assertTrue(response.status_code == status.HTTP_200_OK)
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
 
     def test_get_incorrect_type_request_should_fail(self):
         payload = {'candidate_id': self.employee.id, 'employee_id': "string instead of int"}
         response = self.client.get(reverse('timeslots-list'), payload)
-        self.assertTrue(response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY)
+        self.assertEquals(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_get_missing_args_request_should_fail(self):
         payload = {'candidate_id': self.employee.id}
         response = self.client.get(reverse('timeslots-list'), payload)
-        self.assertTrue(response.status_code == status.HTTP_400_BAD_REQUEST)
+        self.assertEquals(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     # def test_str(self):
     #     response = self.client.get('/api/employees/1')
