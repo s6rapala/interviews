@@ -5,12 +5,14 @@ from rest_framework import serializers
 from interviews.models import EmployeeAvailability, Employee, Candidate, CandidateAvailability
 
 
-class EmployeeAvailabilityListSerializer(serializers.HyperlinkedModelSerializer):
+class StartDateEndDateOrderChecker:
     def validate(self, data):
         if ('start_date' in data and 'end_date' in data) and data['start_date'] > data['end_date']:
             raise serializers.ValidationError("start_date must occur after end_date")
         return data
 
+
+class EmployeeAvailabilityListSerializer(StartDateEndDateOrderChecker, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmployeeAvailability
         fields = [
@@ -62,12 +64,7 @@ class CandidateListSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CandidateAvailabilityListSerializer(serializers.HyperlinkedModelSerializer):
-    def validate(self, data):
-        if ('start_date' in data and 'end_date' in data) and data['start_date'] > data['end_date']:
-            raise serializers.ValidationError("start_date must occur after end_date")
-        return data
-
+class CandidateAvailabilityListSerializer(StartDateEndDateOrderChecker, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CandidateAvailability
         fields = [
@@ -124,6 +121,6 @@ class TimeSlotsSerializer(serializers.Serializer):
             data['employee_id'] = [int(i) for i in data['employee_id'][0].split(',')]
         except ValueError:
             pass  # we can pass because it will be handled later by serializer itself
-        except KeyError as e:
+        except KeyError:
             raise serializers.ValidationError("KeyError test")
         return super().to_internal_value(data)
