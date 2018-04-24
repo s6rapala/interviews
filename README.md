@@ -9,6 +9,16 @@ In other words, given a candidate and their time availability,
 list all possible HR people who can interview this candidate.
 
 
+# Installation
+```shell
+git clone this repo
+cd interviews
+virtualenv .
+source bin/activate
+pip install -r requiremenets.txt
+```
+
+
 # List of REST endpoints
 #### Manage list of employees who make interviews
 /employees
