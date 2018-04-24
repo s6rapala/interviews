@@ -1,5 +1,14 @@
 codecov:
-    branch: master
+  branch: master
+  notify:
+    slack:
+      default:
+        url: "https://hooks.slack.com/services/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"
+        threshold: 1%
+        only_pulls: false
+        branches: null
+        flags: null
+        paths: null
 
 coverage:
   precision: 2
