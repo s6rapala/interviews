@@ -106,3 +106,5 @@ ENV/
 *.sqlite3
 interviews/migrations/
 migrations/
+.idea/httpRequests
+interviews_app/.idea/
