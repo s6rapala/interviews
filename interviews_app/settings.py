@@ -141,3 +141,14 @@ if 'TRAVIS' in os.environ:
             'PORT':     '',
         }
     }
+
+if 'DOCKER' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }

@@ -10,13 +10,22 @@ list all possible HR people who can interview this candidate.
 
 
 # Installation
+### Local installation
 ```shell
 git clone this repo
 cd interviews
 virtualenv .
 source bin/activate
 pip install -r requiremenets.txt
+python manage.py runserver
 ```
+
+### Docker installation (docker-compose)
+```shell
+docker-compose run web django-admin.py startproject interviews_app .
+docker-compose up
+```
+
 
 
 # List of REST endpoints
