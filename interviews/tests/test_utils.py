@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from unittest import TestCase
 
-from interviews.utils import intersection, start_and_end_date_of_next_week
+from interviews.utils import intersection, end_date_of_next_week, start_date_of_next_week
 
 
 class TestIntersection(TestCase):
@@ -83,8 +83,12 @@ class TestIntersection(TestCase):
 
 
 class TestNextWeekDatesGenerator(TestCase):
-    def test_start_and_end_date_of_next_week(self):
+    def test_start_date_of_next_week(self):
         tuesday = datetime(2018, 4, 24)
         next_monday = datetime(2018, 4, 30, 0, 0)
+        self.assertEquals(start_date_of_next_week(tuesday), next_monday)
+
+    def test_end_date_of_next_week(self):
+        tuesday = datetime(2018, 4, 24)
         next_saturday = datetime(2018, 5, 6, 23, 59)
-        self.assertEquals(start_and_end_date_of_next_week(tuesday), (next_monday, next_saturday))
+        self.assertEquals(end_date_of_next_week(tuesday), next_saturday)

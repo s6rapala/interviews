@@ -3,6 +3,7 @@ import copy
 from rest_framework import serializers
 
 from interviews.models import EmployeeAvailability, Employee, Candidate, CandidateAvailability
+from interviews.utils import start_date_of_next_week, end_date_of_next_week
 
 
 class StartDateEndDateOrderChecker:
@@ -105,8 +106,8 @@ class AvailableTimeSlotsListSerializer(serializers.Serializer):
 class TimeSlotsSerializer(serializers.Serializer):
     candidate_id = serializers.IntegerField()
     employee_id = serializers.ListField(child=serializers.IntegerField())
-    start_date = serializers.DateTimeField(required=False)
-    end_date = serializers.DateTimeField(required=False)
+    start_date = serializers.DateTimeField(required=False, default=start_date_of_next_week())
+    end_date = serializers.DateTimeField(required=False, default=end_date_of_next_week())
 
     def update(self, instance, validated_data):
         pass

@@ -26,7 +26,11 @@ def _has_intersection(first_start, first_end, seconds_start, second_end):
 
 
 def intersection(candidate_intervals, employee_intervals) -> list:
-    """find intersections between two sets of intervals"""
+    """
+    Find intersections between two sets of intervals
+
+    This is a O(n^2) algorithm, which is not too bad, especially given practical constraints
+    """
     candidate_intervals = convert_to_named_tuple(candidate_intervals)
     employee_intervals = convert_to_named_tuple(employee_intervals)
 
@@ -47,7 +51,12 @@ def convert_to_named_tuple(dicts: list) -> list:
     return [namedtuple('Candidate', d.keys())(**d) for d in dicts]
 
 
-def start_and_end_date_of_next_week(today=datetime.date.today()):
+def start_date_of_next_week(today=datetime.date.today()):
+    next_monday = today + datetime.timedelta(days=(7 - today.weekday()))
+    return next_monday
+
+
+def end_date_of_next_week(today=datetime.date.today()):
     next_monday = today + datetime.timedelta(days=(7 - today.weekday()))
     next_saturday = next_monday + datetime.timedelta(days=7, minutes=-1)
-    return next_monday, next_saturday
+    return next_saturday
