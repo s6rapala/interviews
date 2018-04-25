@@ -10,8 +10,8 @@ class TestIntersection(TestCase):
     https://en.wikipedia.org/wiki/Allen%27s_interval_algebra
     and on top of that relations with > 2 intervals
     """
-    CANDIDATE_ID = 1  # can only be exactly 1
-    EMPLOYEE_ID = 2  #
+    CANDIDATE_ID = 1
+    EMPLOYEE_ID = 2
 
     def test_intersection_equals(self):
         now = datetime.now()
