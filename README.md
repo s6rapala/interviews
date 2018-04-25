@@ -20,7 +20,7 @@ pip install -r requiremenets.txt
 
 
 # List of REST endpoints
-#### Manage list of employees who make interviews
+### Manage list of employees who make interviews
 /employees
 - GET - list all employees
 - POST - create new employee
@@ -46,7 +46,7 @@ pip install -r requiremenets.txt
 - PUT - update a new time slot for a specific employee
 
 
-#### Manage list of candidates who take interviews
+### Manage list of candidates who take interviews
 /candidates
 - GET - list all candidates
 - POST - create a new candidate
@@ -67,9 +67,9 @@ pip install -r requiremenets.txt
 
 
 
-#### Receive a list of time slots to make an interview
+### Receive a list of time slots to make an interview
 
-Note: Providing a candidate and list of interviewers required.
+Note: Providing a candidate and list of interviewers __required__.
 
 /timeslots/?candidate_id={candidateKey}?employee_id={employeeKeys}
 - GET - get available time slots for a specific candidate and a list of employees for next week
