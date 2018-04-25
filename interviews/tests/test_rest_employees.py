@@ -191,7 +191,8 @@ class TestCandidateViewSet(APITestCase):
         data = {'name': candidate_name}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data, {'id': 2, 'name': candidate_name})  # id=2 because id=1 comes from setUp()
+        id = Candidate.objects.get(name=candidate_name).id
+        self.assertEqual(response.data, {'id': id, 'name': candidate_name})
         self.assertEqual(Candidate.objects.count(), 2)
         self.assertEqual(Candidate.objects.get(name=candidate_name).name, candidate_name)
 
