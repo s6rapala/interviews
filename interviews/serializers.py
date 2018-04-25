@@ -103,7 +103,7 @@ class AvailableTimeSlotsListSerializer(serializers.Serializer):
         pass
 
 
-class TimeSlotsSerializer(serializers.Serializer):
+class TimeSlotsSerializerInput(serializers.Serializer):
     candidate_id = serializers.IntegerField()
     employee_id = serializers.ListField(child=serializers.IntegerField())
     start_date = serializers.DateTimeField(required=False, default=start_date_of_next_week())
@@ -117,11 +117,10 @@ class TimeSlotsSerializer(serializers.Serializer):
 
     def to_internal_value(self, data):
         data = copy.copy(dict(data))  # shallow copy is sufficient (no need for deepcopy)
+        # TODO query_param always come as a list from URL; better way for this [0] nonsense
+        data = {k: v[0] for k, v in data.items()}
         try:
-            data['candidate_id'] = int(data['candidate_id'][0])
-            data['employee_id'] = [int(i) for i in data['employee_id'][0].split(',')]
-        except ValueError:
-            pass  # we can pass because it will be handled later by serializer itself
-        except KeyError:
-            raise serializers.ValidationError("KeyError test")
+            data['employee_id'] = [int(i) for i in data['employee_id'].split(',')]
+        except (ValueError, KeyError):
+            pass  # validator throw the error if it find it
         return super().to_internal_value(data)
