@@ -13,15 +13,16 @@ class AvailableTimeSlotsListViewSet(viewsets.ReadOnlyModelViewSet):
         data = TimeSlotsSerializerInput(data=self.request.query_params)
         data.is_valid(raise_exception=True)
 
+        start_date = data.validated_data['start_date']
+        end_date = data.validated_data['end_date']
+
         queryset_candidate_timeslots = CandidateAvailability.objects \
             .filter(candidate_id=data.validated_data['candidate_id'],
-                    start_date__gte=data.validated_data['start_date'],
-                    end_date__lte=data.validated_data['end_date']) \
+                    start_date__gte=start_date, end_date__lte=end_date) \
             .values('candidate_id', 'start_date', 'end_date')
         queryset_employee_timeslots = EmployeeAvailability.objects \
             .filter(employee_id__in=data.validated_data['employee_id'],
-                    start_date__gte=data.validated_data['start_date'],
-                    end_date__lte=data.validated_data['end_date']) \
+                    start_date__gte=start_date, end_date__lte=end_date) \
             .values('employee_id', 'start_date', 'end_date')
 
         # technically you can do intersection in the database, but computationally I would rather avoid it
